@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.*;
 import java.io.*;
 
+//TODO: add a do-while loop
+// 100 blank lines in terminal after showing boards
+// Change String[][] to char[][]
+// Change the ASCII display to only use "-"
+
 public class Battleship {
     public static int numRows = 5;
     public static int numCols = 5;
