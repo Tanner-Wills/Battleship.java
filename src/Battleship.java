@@ -234,6 +234,7 @@ public class Battleship {
                                     if (gridPlayer2[xStrike][yStrike].contains("@")) {
                                         System.out.println("Target hit! \n");
                                         targetHistory1[xStrike][yStrike] = "X";
+                                        gridPlayer2[xStrike][yStrike] = "X";
                                         player2Ships -= 1;
                                         playerTurn = 2;
                                         input.nextLine();
@@ -284,6 +285,7 @@ public class Battleship {
                                     if (gridPlayer1[xStrike][yStrike].contains("@")) {
                                         System.out.println("Target hit! \n");
                                         targetHistory2[xStrike][yStrike] = "X";
+                                        gridPlayer1[xStrike][yStrike] = "X";
                                         player1Ships -= 1;
                                         playerTurn = 1;
                                         input.nextLine();
@@ -292,7 +294,7 @@ public class Battleship {
                                     } else {
                                         System.out.println("Miss! \n");
                                         targetHistory2[xStrike][yStrike] = "O";
-                                        gridPlayer2[xStrike][yStrike] = "O";
+                                        gridPlayer1[xStrike][yStrike] = "O";
                                         playerTurn = 1;
                                         input.nextLine();
                                         createTargetHistory();
