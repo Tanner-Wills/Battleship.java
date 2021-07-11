@@ -10,7 +10,6 @@ public class Battleship {
     public static String[][] gridPlayer2 = new String[numRows][numCols];
     public static String[][] targetHistory1 = new String[numRows][numRows];
     public static String[][] targetHistory2 = new String[numRows][numRows];
-    //public static int[][] misses = new int[numRows][numRows];
 
     public static void main(String[] args) {
         // Initial Prompt
@@ -66,7 +65,6 @@ public class Battleship {
                                 gridPlayer1[xCoord][yCoord] = "@";
                                 ship ++;
                                 input.nextLine();
-
                             } else {
                                 System.out.println("You already have a ship there. Choose different coordinates.");
                                 input.nextLine();
@@ -83,7 +81,6 @@ public class Battleship {
                     System.out.println("Invalid coordinates. Choose different coordinates.");
                     input.nextLine();
                 }
-
         }
             createGameBoard1();
 
@@ -94,15 +91,12 @@ public class Battleship {
                     targetHistory2[rowEntry][colEntry] = " ";
                 }
             }
-
-
             //initialize gridPlayer2 matrix
             for(int rowEntry = 0; rowEntry < numRows; rowEntry ++){
                 for(int colEntry = 0; colEntry < numRows; colEntry ++){
                     gridPlayer2[rowEntry][colEntry] = " ";
                 }
             }
-
             ship = 0;
             System.out.println("Ready Player 2: ");
             while (ship < player2Ships){
@@ -119,7 +113,6 @@ public class Battleship {
                                 gridPlayer2[xCoord][yCoord] = "@";
                                 ship ++;
                                 input.nextLine();
-
                             } else {
                                 System.out.println("You already have a ship there. Choose different coordinates.");
                                 input.nextLine();
@@ -217,13 +210,14 @@ public class Battleship {
         }
 
         public static void playBattleship() {
+            System.out.println("Board is set up. Begin Battleship! \n");
             Scanner input = new Scanner(System.in);
             int playerTurn = 1;
             int xStrike = 0;
             int yStrike = 0;
 
             // ***** While loop until a player has lost *****
-            while (player1Ships > 0 || player2Ships > 0) {
+            while (player1Ships > 0 && player2Ships > 0) {
                 // ***** Player 1 Turn *****
                 while (playerTurn == 1) {
                     System.out.println("Player " + playerTurn + " enter a coordinate to strike!");
@@ -235,16 +229,14 @@ public class Battleship {
 
                             if (xStrike >= 0 && xStrike < 5 && yStrike >= 0 && yStrike < 5) {
 
-                                if (targetHistory1[xStrike][yStrike].contains(" ")) {
+                                if (!targetHistory1[xStrike][yStrike].contains("X") && !targetHistory1[xStrike][yStrike].contains("O")) {
 
                                     if (gridPlayer2[xStrike][yStrike].contains("@")) {
                                         System.out.println("Target hit! \n");
                                         targetHistory1[xStrike][yStrike] = "X";
-                                        gridPlayer2[xStrike][yStrike] = "X";
                                         player2Ships -= 1;
                                         playerTurn = 2;
                                         input.nextLine();
-                                        //createGameBoard();
                                         createTargetHistory();
                                         System.out.println("Player 2 ships remaining: " + player2Ships);
                                     } else {
@@ -253,10 +245,8 @@ public class Battleship {
                                         gridPlayer2[xStrike][yStrike] = "O";
                                         playerTurn = 2;
                                         input.nextLine();
-                                        //createGameBoard();
                                         createTargetHistory();
                                     }
-
                                 } else {
                                     System.out.println("You already fired on this spot. Choose different coordinates.");
                                     input.nextLine();
@@ -273,9 +263,11 @@ public class Battleship {
                         System.out.println("Invalid coordinates. Choose different coordinates.");
                         input.nextLine();
                     }
-
                 }
-
+            // break statement if player 1 wins mid-loop
+            if(player2Ships < 1){
+                break;
+            }
                 // ***** Player 2 Turn *****
                 while (playerTurn == 2) {
                     System.out.println("Player " + playerTurn + " enter a coordinate to strike!");
@@ -287,16 +279,14 @@ public class Battleship {
 
                             if (xStrike >= 0 && xStrike < 5 && yStrike >= 0 && yStrike < 5) {
 
-                                if (targetHistory2[xStrike][yStrike].contains(" ")) {
+                                if (!targetHistory2[xStrike][yStrike].contains("X") && !targetHistory2[xStrike][yStrike].contains("O")) {
 
                                     if (gridPlayer1[xStrike][yStrike].contains("@")) {
                                         System.out.println("Target hit! \n");
                                         targetHistory2[xStrike][yStrike] = "X";
-                                        gridPlayer2[xStrike][yStrike] = "X";
                                         player1Ships -= 1;
                                         playerTurn = 1;
                                         input.nextLine();
-                                        //createGameBoard();
                                         createTargetHistory();
                                         System.out.println("Player 1 ships remaining: " + player1Ships);
                                     } else {
@@ -305,10 +295,8 @@ public class Battleship {
                                         gridPlayer2[xStrike][yStrike] = "O";
                                         playerTurn = 1;
                                         input.nextLine();
-                                        //createGameBoard();
                                         createTargetHistory();
                                     }
-
                                 } else {
                                     System.out.println("You already fired on this spot. Choose different coordinates.");
                                     input.nextLine();
@@ -325,7 +313,6 @@ public class Battleship {
                         System.out.println("Invalid coordinates. Choose different coordinates.");
                         input.nextLine();
                     }
-
                 }
             }
 
@@ -338,6 +325,8 @@ public class Battleship {
             createGameBoard1();
             createGameBoard2();
         }
+
+
             /*
             System.out.println();
             System.out.println("    1     2     3     4     5");
