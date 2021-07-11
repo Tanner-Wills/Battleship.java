@@ -1,5 +1,6 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 public class Battleship {
     public static int numRows = 5;
@@ -15,21 +16,18 @@ public class Battleship {
         // Initial Prompt
         System.out.println("Welcome to Battleship!\n");
 
+        Scanner input = new Scanner(System.in);
+
         // Step 1 - initialize "grid1" variable and enter player 1 ships
-        choosePlayerCoordinates();
+        choosePlayerCoordinates(input);
 
-        // Step 2 - Identify player1Ships coordinates
-        //createTargetHistory();
-
-        // Step 3 -  Create the game board
-        //createGameBoard();
 
         // Step 4 - Play Battleship! until a player sinks every ship
-        playBattleship();
+        playBattleship(input);
 
 }
 // ************* BATTLESHIP FUNCTIONS *************
-        public static void choosePlayerCoordinates(){
+        public static void choosePlayerCoordinates(Scanner input){
             // ***** Player 1 *****
             //initialize targetHistory matrix
             for(int rowEntry = 0; rowEntry < numRows; rowEntry ++){
@@ -45,7 +43,7 @@ public class Battleship {
                 }
             }
 
-            Scanner input = new Scanner(System.in);
+            //Scanner input = new Scanner(System.in);
             int ship = 0;
             int xCoord = 0;
             int yCoord = 0;
@@ -209,9 +207,9 @@ public class Battleship {
 
         }
 
-        public static void playBattleship() {
+        public static void playBattleship(Scanner input) {
             System.out.println("Board is set up. Begin Battleship! \n");
-            Scanner input = new Scanner(System.in);
+            //Scanner input = new Scanner(System.in);
             int playerTurn = 1;
             int xStrike = 0;
             int yStrike = 0;
@@ -264,6 +262,7 @@ public class Battleship {
                         System.out.println("Invalid coordinates. Choose different coordinates.");
                         input.nextLine();
                     }
+                    //printBattleShip("01");
                 }
             // break statement if player 1 wins mid-loop
             if(player2Ships < 1){
@@ -328,6 +327,25 @@ public class Battleship {
             createGameBoard2();
         }
 
+        // Use this method to print game boards to the console.
+        private static void printBattleShip(char[][] player) {
+            System.out.print("  ");
+            for (int row = -1; row < 5; row++) {
+                if (row > -1) {
+                    System.out.print(row + " ");
+                }
+                for (int column = 0; column < 5; column++) {
+                    if (row == -1) {
+                        System.out.print(column + " ");
+                    } else {
+                        System.out.print(player[row][column] + " ");
+                    }
+                }
+                System.out.println("");
+            }
+        }
+
+
 
             /*
             System.out.println();
@@ -344,7 +362,7 @@ public class Battleship {
             System.out.println("5|     |     |     |     |     |");
             System.out.println(" +-----+-----+-----+-----+-----+");
             */
-        }
+}
 
 
 
